@@ -1,25 +1,25 @@
 code_interpreter = {
     "toolSpec": {
         "name": "code_interpreter",
-        "description": """Runs self-contained code in a new Python 3.12 Jupyter notebook.
-- This tool can be used to perform various tasks, including data analysis, data visualization, machine learning and computer vision.
-- The code executed by this tool does not have internet access. 
-- Don't use URLs especially HTTP or HTTPS and APIs in the code.
-- Do not install any additional libraries or other software beyond the supported libraries listed below.
-- Code must be executable, correct, and self-contained. All variables must be defined within the code block. Verify the code to ensure it is correct and complete. If the code is incorrect or incomplete, rewrite it and verify again.
-- Each code block should be self-contained and should not rely on variables or data from previous cells. Always write the code as if it is the first and only cell in the notebook.
-- Results must always be rendered in the Jupyter notebook cell output.
-- Supported additional libraries: pandas, numpy, matplotlib, scikit-learn, seaborn, scipy, pillow, opencv, geopandas, pyarrow, imageio, Faker.
-- Always import libraries using the following conventions: import pandas as pd, import numpy as np, import matplotlib.pyplot as plt, import seaborn as sns, import cv2 (for opencv).
-- When working with OpenCV images, always display them using matplotlib and use the FONT_HERSHEY_SIMPLEX font for text. For PIL use ImageFont.load_default()
-- To handle data files like CSV or Excel, first, run the tool to read the file and display the schema (e.g., `df = pd.read_csv('file.csv')` followed by `print(df.head())` or `print(df.info())`).
-- Include the complete and updated code without any truncation or minimization. Don't use "// rest of the code remains the same...".
-- Specify all generated files in the output_files argument
+        "description": """自己完結型のコードを新しいPython 3.12 Jupyterノートブックで実行するツール
+- このツールは、データ分析、データ可視化、機械学習、コンピュータビジョンなど、さまざまなタスクを実行するのに使用できます。
+- このツールで実行されるコードはインターネットアクセスを持ちません。
+- コード内でURLs(特にHTTPやHTTPS)やAPIを使用しないでください。
+- 以下にリストされているサポートされているライブラリ以外の追加のライブラリやその他のソフトウェアをインストールしないでください。
+- コードは実行可能、正確、そして自己完結型である必要があります。すべての変数はコードブロック内で定義されなければなりません。コードが正確で完全であることを確認するために、コードを検証してください。コードが不正確または不完全な場合は、書き直して再度検証してください。
+- 各コードブロックは自己完結型であり、前のセルの変数やデータに依存してはいけません。常に、ノートブックの最初で唯一のセルであるかのようにコードを書いてください。
+- 結果は常にJupyterノートブックのセル出力にレンダリングされる必要があります。
+- サポートされている追加のライブラリ:pandas, numpy, matplotlib, scikit-learn, seaborn, scipy, pillow, opencv, geopandas, pyarrow, imageio, Faker。
+- 常に以下の規則を使用してライブラリをインポートしてください:import pandas as pd, import numpy as np, import matplotlib.pyplot as plt, import seaborn as sns, import cv2 (opencvの場合)。
+- OpenCV画像を扱う際は、常にmatplotlibを使用して表示し、テキストにはFONT_HERSHEY_SIMPLEXフォントを使用してください。PILの場合はImageFont.load_default()を使用してください。
+- CSVやExcelなどのデータファイルを扱う場合は、まずツールを実行してファイルを読み込み、スキーマを表示してください(例:`df = pd.read_csv('file.csv')`の後に`print(df.head())`または`print(df.info())`)。
+- 完全で更新されたコードを、省略や最小化なしで含めてください。"// 残りのコードは同じ..."などは使用しないでください。
+- 生成されたすべてのファイルをoutput_files引数で指定してください。
 
-# Don't use the tool for:
-- Simple, informational, or short content, such as brief code snippets, mathematical equations, or small examples.
-- Primarily explanatory, instructional, or illustrative content, such as examples provided to clarify a concept
-- Conversational or explanatory content that doesn't represent executing code
+# 以下の場合にはツールを使用しないでください:
+- 簡単な、情報提供のみの、または短い内容(簡単なコードスニペット、数式、小さな例など)。
+- 主に説明的、教育的、または例示的な内容(概念を明確にするための例など)。
+- コードの実行を表さない会話的または説明的な内容。
 """,
         "inputSchema": {
             "json": {
@@ -47,7 +47,7 @@ code_interpreter = {
 web_search = {
     "toolSpec": {
         "name": "web_search",
-        "description": "Searches the web for information using a search query. It can also crawl URLs for information.",
+        "description": "ウェブ上の情報を検索クエリを使って検索します。また、URLをクロールして情報を収集することもできます。",
         "inputSchema": {
             "json": {
                 "type": "object",

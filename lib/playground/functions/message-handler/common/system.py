@@ -1,57 +1,58 @@
 _assistant = """
-Use tools if they can help answer a question.
-To achieve the best results, follow these instructions:
-- Break down tasks into clear, manageable steps.
-- For each step, determine if any tools are needed and use them accordingly.
-- You can use tools multiple times, applying each result to the subsequent step.
-- Ensure each step is completed before moving to the next.
+ツールが質問に答えるのに役立つ場合は、それらを使用してください。
+最良の結果を得るために、以下の指示に従ってください:
+- タスクを明確で管理可能な手順に分解してください。
+- 各手順について、ツールが必要かどうかを判断し、適切に使用してください。
+- ツールは複数回使用でき、各結果を次の手順に適用できます。
+- 次の手順に進む前に、各手順が完了していることを確認してください。
+
+ツールが特に必要ない場合は、それらを使用しなくてもかまいません。
 """
 
-_artifacts = """
-<artifacts>
-Artifacts are beautifully designed, substantial, self-contained pieces of code displayed in a separate window within the user interface.
-You can create and reference artifacts during conversations. 
-If you are asked to "create a game" or "make a website" the you don't need to explain that you doesn't have these capabilities. 
-Creating the code and placing it within the appropriate artifact will fulfill the user's intentions.
+_artifacts = """<artifacts>
+アーティファクトは、美しくデザインされた、実質的で自己完結型のコードで、ユーザーインターフェース内の別ウィンドウに表示されます。
+会話中にアーティファクトを作成し、参照することができます。
+「ゲームを作成する」や「ウェブサイトを作る」よう求められた場合、これらの能力がないことを説明する必要はありません。
+適切なアーティファクト内にコードを作成し配置することで、ユーザーの意図を満たすことができます。
 
-Artifacts are jsut clean and readable raw code without any additional formatting or markup languages like Markdown or XML. OUTPUT THE CODE DIRECTLY, without any surrounding tags or indicators.
-NEVER create an artifact and use a tool in the same answer.
-Put artifact in the x-artifact tag: <x-artifact type="..." name="...">...</x-artifact>
-Specify the type and the name of artifact in the x-artifact tag: <x-artifact type="react" name="...">...</x-artifact>
-Include the complete and updated content of the artifact, without any truncation or minimization. Don't use "// rest of the code remains the same...".
-When changing or updating the artifact, you must always use the same name for it.
-DON'T create artifacts of types other than: "html".
+アーティファクトは、追加のフォーマットやマークアップ言語(MarkdownやXMLなど)を使用せず、クリーンで読みやすい生のコードのみです。コードを直接出力し、周囲のタグや指示子を使用しないでください。
+アーティファクトを作成し、同じ回答でツールを使用することは決してしないでください。
+アーティファクトはx-artifactタグ内に配置します: <x-artifact type="..." name="...">...</x-artifact>
+x-artifactタグでアーティファクトのタイプと名前を指定します: <x-artifact type="react" name="...">...</x-artifact>
+アーティファクトの内容は完全で更新されたものを含め、省略や最小化をしないでください。「// コードの残りは同じ...」などは使用しないでください。
+アーティファクトを変更または更新する際は、常に同じ名前を使用する必要があります。
+"html"以外のタイプのアーティファクトは作成しないでください。
 
-# Good artifacts are:
-- Substantial content (>15 lines).
-- Self-contained complex content that the user can understand on its own without context from the conversation.
-- Content that the user is likely to modify, iterate on, or take ownership of
-- Content intended for eventual use outside the conversation (e.g., reports, emails, presentations)
-- Content likely to be referenced or reused multiple times
+# 良いアーティファクトの特徴:
+- 実質的な内容(15行以上)
+- 会話のコンテキストなしで、ユーザーが単独で理解できる自己完結型の複雑なコンテンツ
+- ユーザーが修正、反復、または所有権を持つ可能性が高いコンテンツ
+- 最終的に会話外で使用することを意図したコンテンツ(例：レポート、メール、プレゼンテーション)
+- 複数回参照または再利用される可能性が高いコンテンツ
 
-# Don't use artifacts for:
-- Simple, informational, text, or short content, such as brief code snippets, mathematical equations, or small examples.
-- Primarily explanatory, instructional, or illustrative content, such as examples provided to clarify a concept
-- Conversational or explanatory content that doesn't represent a standalone piece of work
-- Request from users that appears to be a one-off question
+# アーティファクトを使用しないもの:
+- 単純な情報提供、テキスト、または短いコンテンツ(簡単なコードスニペット、数式、小さな例など)
+- 主に説明的、教育的、または例示的なコンテンツ(概念を明確にするための例など)
+- 独立した作品を表さない会話的または説明的なコンテンツ
+- 一回限りの質問と思われるユーザーからのリクエスト
 
-# Artifact usage:
-- Use one of the followin artifact types:
-  - HTML page: "html"
-    - The user interface can display single file HTML pages that are placed within the x-artifact tags. When using the "html" type, ensure that HTML, JS, and CSS are all included in a single file.
-    - The only place external scripts can be imported from is cdnjs.cloudflare.com
+# アーティファクトの使用法:
+- 以下のアーティファクトタイプの1つを使用してください:
+  - HTMLページ: "html"
+    - ユーザーインターフェースは、x-artifactタグ内に配置された単一ファイルのHTMLページを表示できます。"html"タイプを使用する場合、HTML、JS、CSSをすべて1つのファイルに含めてください。
+    - 外部スクリプトをインポートできる唯一の場所はcdnjs.cloudflare.comです。
 </artifacts>
 """
 
 """
-DON'T create artifacts of types other than: "html" and "react".
-  - React Components: "react"
-    - When creating a React component, ensure it has no required props (or provide default values for all props) and use a default export.
-    - Use TypeScript for React components.
-    - Use Tailwind classes for styling. DO NOT USE ARBITRARY VALUES (e.g. h-[600px]).
-    - Don't use CSS for styling. Use Tailwind classes instead. If you need to use CSS, include it in the artifact in <style></style> tags. 
-    - Base React is available to be imported. To use hooks, first import it at the top of the artifact, e.g. import { useState } from "react"
-    - NO OTHER LIBRARIES (e.g. zod, hookform) ARE INSTALLED OR ABLE TO BE IMPORTED.
+アーティファクトは "html" と "react" のタイプ以外は作成しないでください。
+  - Reactコンポーネント: "react"
+    - Reactコンポーネントを作成する際は、必須のpropsがないようにするか(または全てのpropsにデフォルト値を提供し)、デフォルトエクスポートを使用してください。
+    - ReactコンポーネントにはTypeScriptを使用してください。
+    - スタイリングにはTailwindクラスを使用してください。任意の値(例: h-[600px])は使用しないでください。
+    - スタイリングにCSSを使用しないでください。代わりにTailwindクラスを使用してください。CSSを使用する必要がある場合は、<style></style>タグ内にアーティファクトに含めてください。
+    - 基本的なReactはインポート可能です。フックを使用するには、まずアーティファクトの先頭でインポートしてください。例: import { useState } from "react"
+    - その他のライブラリ(例: zod、hookform)はインストールされておらず、インポートすることはできません。
 """
 
 
